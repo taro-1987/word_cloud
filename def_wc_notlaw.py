@@ -16,7 +16,7 @@ def wc_notlaw(analysis_text,
     for result in results.split('\n')[:-2]:
         x = result.split('\t')[4]
         if '名詞' in x:
-                nouns.append(result.split('\t')[3])
+                nouns.append(result.split('\t')[0])
         
     words = ' '.join(nouns)
     wordcloud = WordCloud(width=1280, height=720,
