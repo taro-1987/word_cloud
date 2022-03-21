@@ -11,16 +11,16 @@ def wc_law(analysis_text,
         color_map,font_path,
         min_font_size,
         stop_words):
-    mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
+    mecab = MeCab.Tagger('mecab-ipadic-neologd')
     results = mecab.parse(analysis_text)
 
     nouns = []
     for result in results.split('\n')[:-2]:
-        x = result.split(',')[0]
+        x = result.split('\t')[4]
         if '名詞' in x\
-            and (not x.startswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','第')) \
-            and not x.endswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','条','節','年'))):
-            nouns.append(result.split(',')[6])
+           and (not x.startswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','第')) \
+           and not x.endswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','条','節','年'))):
+           nouns.append(result.split('\t')[3])
         
     words = ' '.join(nouns)
     wordcloud = WordCloud(width=1280, height=720,
