@@ -11,16 +11,14 @@ def wc_law(analysis_text,
         color_map,font_path,
         min_font_size,
         stop_words):
-    mecab = MeCab.Tagger('mecab-ipadic-neologd')
+    mecab = MeCab.Tagger('mecab/dic/mecab-ipadic-neologd')
     results = mecab.parse(analysis_text)
 
     nouns = []
     for result in results.split('\n')[:-2]:
         x = result.split('\t')[4]
-        if '名詞' in x\
-           and (not x.startswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','第')) \
-           and not x.endswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','条','節','年'))):
-           nouns.append(result.split('\t')[3])
+        if '名詞' in x:
+            nouns.append(result.split('\t')[0])
         
     words = ' '.join(nouns)
     wordcloud = WordCloud(width=1280, height=720,
@@ -33,3 +31,7 @@ def wc_law(analysis_text,
                     stopwords=set(stop_words))
     wordcloud.generate(words)
     wordcloud.to_file('wc_image.png')
+
+    # \
+    #         and (not x.startswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','第')) \
+    #         and not x.endswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','条','節','年')))
