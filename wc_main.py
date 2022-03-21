@@ -6,6 +6,8 @@ import stop_word_list
 from def_wc_law import wc_law
 from def_wc_notlaw import wc_notlaw
 
+st.set_page_config('ワードクラウド作成アプリ')
+
 # メインカラム
 st.title('ワードクラウド作成アプリ')
 st.write('法律に特化したワードクラウドを作成することで、その法律がどんな内容なのかをざっくりと理解することができます。')
@@ -68,4 +70,4 @@ elif analysis_button:
     st.write('条文を入力した後にボタンを押してください！')
 
 st.write('----------')
-st.caption('©️ 2022 shotaro') 
+st.caption('©️ 2022 Shotaro') 
