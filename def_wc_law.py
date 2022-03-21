@@ -11,7 +11,7 @@ def wc_law(analysis_text,
         color_map,font_path,
         min_font_size,
         stop_words):
-    mecab = MeCab.Tagger()
+    mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
     results = mecab.parse(analysis_text)
 
     nouns = []
