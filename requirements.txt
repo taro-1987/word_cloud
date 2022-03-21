@@ -2,3 +2,4 @@ Pillow==8.2.0
 wordcloud==1.8.1
 mecab-python3==1.0.5
 streamlit==1.7.0
+unidic-lite==1.0.8
