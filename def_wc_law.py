@@ -27,11 +27,8 @@ def wc_law(analysis_text,
                     colormap=color_map,
                     font_path=font_path,
                     min_font_size=min_font_size,
-                    collocations = False,
+                    collocations=False,
                     stopwords=set(stop_words))
+
     wordcloud.generate(words)
     wordcloud.to_file('wc_image.png')
-
-    # \
-    #         and (not x.startswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','第')) \
-    #         and not x.endswith(('〇','一','二','三','四','五','六','七','八','九','十','百','千','条','節','年')))
