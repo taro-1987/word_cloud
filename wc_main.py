@@ -4,7 +4,6 @@ import streamlit as st
 
 import stop_word_list
 from def_wc_law import wc_law
-from def_wc_notlaw import wc_notlaw
 
 st.set_page_config('ワードクラウド作成アプリ')
 
@@ -41,33 +40,37 @@ st.sidebar.caption('※1に近づくほど、縦書きが減ります（「1」�
 
 add_stop_word = st.sidebar.text_input('●除外したい単語があれば入力してください（複数指定する場合は、全角スペース空けて入力）。')
 list_add_atop_word = add_stop_word.split('　')
-stop_words = stop_word_list.base_stop_words + list_add_atop_word
 st.sidebar.caption('※法律一般に見られる単語はあらかじめ除いています。') 
 
 st.sidebar.write('----------')
 select_mode = st.sidebar.checkbox('法律特化モード',value=True)
 st.sidebar.caption('チェックを外すと、普通のワードクラウド制作アプリになります。') 
+st.sidebar.write('----------')
+with open('kempo.txt',) as text_file:
+    st.sidebar.download_button(
+    label='テスト用のデータ：憲法',
+    data=text_file,
+    file_name='kempo.txt')
 
 now = datetime.now().strftime('_%Y-%m-%d')
 
 if analysis_text and analysis_button:
     if select_mode:
-        wc_law(
-            analysis_text,prefer_horizontal,background_color,
-            color_map,font_path,min_font_size,stop_words)
+        stop_words = stop_word_list.base_stop_words + list_add_atop_word
     else:
-        wc_notlaw(
-            analysis_text,prefer_horizontal,background_color,
-            color_map,font_path,min_font_size,list_add_atop_word)
+        stop_words = list_add_atop_word
+    wc_law(
+        analysis_text,prefer_horizontal,background_color,
+        color_map,font_path,min_font_size,stop_words)
     st.image('wc_image.png')
     
     with open('wc_image.png', "rb") as file:
-        btn = st.download_button(
+        st.download_button(
         label='画像ダウンロード',
         data=file,
         file_name=f'wc_image{now}.png')
 elif analysis_button:
-    st.write('条文を入力した後にボタンを押してください！')
+    st.error('おっと、分析すべき条文が入力されていないようです。')
 
 st.write('----------')
-st.caption('©️ 2022 Shotaro') 
+st.caption('©️ 2022 Shotaro')
