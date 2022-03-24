@@ -48,7 +48,7 @@ st.sidebar.caption('チェックを外すと、普通のワードクラウド制
 st.sidebar.write('----------')
 with open('kempo.txt',) as text_file:
     st.sidebar.download_button(
-    label='テスト用のデータ：憲法',
+    label='テスト用のデータのダウンロード（憲法）',
     data=text_file,
     file_name='kempo.txt')
 
